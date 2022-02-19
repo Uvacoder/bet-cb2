@@ -187,6 +187,7 @@ def main():
     df = data_to_df(game_data)
     train_df, test_df = split_data(df)
     test_log_coef(train_df, test_df)
+    print()
 
     # mat = normalize_mat(get_adj_mat(df))
     # r_lst, r_dct = eigenrank(mat)
