@@ -1,3 +1,4 @@
+from sklearn.linear_model import LinearRegression
 import numpy as np
 import pandas as pd
 from sportsreference.ncaab.teams import Teams
@@ -167,7 +168,6 @@ def predict_pace(df, team1, team2):
     return np.mean([team1_avg_pace, team2_avg_pace])
 
 def calc_margin_error(df, ratings_dict):
-    from sklearn.linear_model import LinearRegression
     df['margin'] = df.apply(lambda row: row['pf'] - row['pa'], axis=1)
     df['team_rating'] = df.apply(lambda row: ratings_dict[row['team_abbr']], axis=1)
     df['opp_rating'] = df.apply(lambda row: ratings_dict[row['opp_abbr']], axis=1)
@@ -185,7 +185,6 @@ def calc_margin_error(df, ratings_dict):
     reg = LinearRegression(fit_intercept=False).fit(train_X, y)
 
     # test
-    print(test_data.head())
     test_data['pred_pace'] = test_data.apply(lambda row: predict_pace(df, row['team_abbr'], row['opp_abbr']), axis=1)
     test_X = test_data[['team_rating', 'opp_rating', 'team_rating*opp_rating', 'location_numeric']].values
     # print(test_X)
@@ -237,15 +236,30 @@ def show_rankings(r_lst):
     for i, row in enumerate(r_lst):
         print(i + 1, row[0], round(row[1], 2))
 
-def test_log_coef(train_df, test_df, plot=False, kvals = np.arange(0, 20, .5), choose=True):
+def margin_error_only_ratings(test_df, ratings_dict):
+    test_df['team_rating'] = test_df.apply(lambda row: ratings_dict[row['team_abbr']], axis=1)
+    test_df['opp_rating'] = test_df.apply(lambda row: ratings_dict[row['opp_abbr']], axis=1)
+    location_to_numeric = {'Home': 1, 'Away': -1, 'Neutral': 0}
+    test_df['location_numeric'] = test_df.apply(lambda row: location_to_numeric[row['location']], axis=1)
+    test_df['margin'] = test_df.apply(lambda row: row['pf'] - row['pa'], axis=1)
+    X = test_df[['team_rating', 'opp_rating', 'location_numeric']].values
+    y = test_df['margin'].values/test_df['pace'].values
+    reg = LinearRegression(fit_intercept=False).fit(X, y)
+    test_df['pred_net_efficiency'] = reg.predict(X)
+    test_df['pred_margin'] = test_df['pred_net_efficiency'] * test_df['pace']
+    rmse = np.sqrt(np.mean((test_df['pred_margin'] - test_df['margin'])**2))
+    # print('rmse: ', rmse)
+    return rmse
+
+def test_log_coef(train_df, test_df, plot=False, kvals = np.arange(0, 10, .2), choose=True):
     x = []
     y = []
     for k in kvals:
         mat = normalize_mat(get_adj_mat(train_df, k))
         r_lst, ratings_dict = eigenrank(mat)
         x.append(k)
-        y.append(win_error(test_df, ratings_dict))
-        print(x[-1], round(y[-1]* 100, 2))
+        y.append(margin_error_only_ratings(test_df, ratings_dict))
+        print(x[-1], 'rmse:', round(y[-1], 2))
 
     if plot:
         plt.plot(x, y)
@@ -256,7 +270,7 @@ def test_log_coef(train_df, test_df, plot=False, kvals = np.arange(0, 20, .5), c
 
     # choose best x correspodning to lowest y
     if choose:
-        best_k = x[y.index(max(y))]
+        best_k = x[y.index(min(y))]
         return best_k
 
 def get_hca():
@@ -285,7 +299,14 @@ def game_score(bs_index, df, ratings_dict, team_name):
     return margin_val * opp_rating
 
 def transform_ratings(ratings_lst):
-    return [[el[0], el[1]**.25 * 100] for el in ratings_lst]
+    # plt.hist([el[1] for el in ratings_lst], bins=50)
+    # plt.title('Ratings Before Transformation')
+    # plt.show()
+    res = [[el[0], el[1]**.25 * 100] for el in ratings_lst]
+    # plt.hist([el[1] for el in res], bins=50)
+    # plt.title('Ratings After Transformation')
+    # plt.show()
+    return res
 
 def add_to_df(df, ratings_dict, em_ratings_dict):
     team_game_score = []
@@ -324,44 +345,76 @@ def get_game_scores_by_team(big_df):
                 res[team].append(row['opp_game_score'])
     return res
 
-def adj_em(big_df, reg, em_ratings_dict, recent_game_scores):
+def game_score_weighted_avg(scores, k = 10):
+    # sort game scores dict by key
+    # assumes dict is sorted from most recent to oldest
+    # uses geometric series to weight scores
+    
+    # let r be the parameter in the geometric series with r = (k - 1)/k
+    # then for the sum from 1 to inf a(r^n) = sum a ((k-1)/k)^n =  a(k-1)
+    # then we need a = 1/(k-1)
+    # because our sum is not infinite we cut off at the last game and give the last score all the weight that is left
+
+    weights = []
+    remaining_weight = 1
+    for i in range(len(scores)):
+        if i == len(scores) - 1:
+            weights.append(remaining_weight)
+        else:
+            w = (1/(k-1)) * ((k-1)/k)**(i+1)
+            weights.append(w)
+            remaining_weight -= w
+    
+    weighted_scores = sum([score * weight for score, weight in zip(scores, weights)])
+    return weighted_scores
+
+def adj_em(big_df, reg, em_ratings_dict, recent_game_scores, loops=10):
     cap = 10 #points
-    res = {}
-    teams = big_df['team_abbr'].unique()
-    print(big_df.head())
-    for team in teams:
-        # TODO: include HCA
-        errors = []
-        team_df = big_df[(big_df['team_abbr'] == team) | (big_df['opp_abbr'] == team)]
-        for idx, game in team_df.iterrows():
-            pred_margin_per_poss = em_ratings_dict[game['team_abbr']] - em_ratings_dict[game['opp_abbr']]  / 100
-            margin_per_poss = game['margin'] / game['pace']
-            if game['team_abbr'] == team:
-                pass
-            else:
-                pred_margin_per_poss = -pred_margin_per_poss
-                margin_per_poss = -margin_per_poss
-            error = pred_margin_per_poss - margin_per_poss
-            error = error * 100
-            if error < 0 and error < -cap:
-                error = -cap
-            elif error > 0 and error > cap:
-                error = cap
-            errors.append(error)
-        res[team] = em_ratings_dict[team] + np.mean(errors)
-        print(res[team], 'EM Rating ', em_ratings_dict[team], 'Adjustment: ', np.mean(errors))
+    res = em_ratings_dict.copy()
+    for i in range(loops):
+        print('Loop: ', str(i+1) + '/' + str(loops))
+        loop_cap = cap / (i + 1)
+        teams = big_df['team_abbr'].unique()
+        for team in teams:
+            errors = []
+            team_df = big_df[(big_df['team_abbr'] == team) | (big_df['opp_abbr'] == team)]
+            for idx, game in team_df.iterrows():
+                pred_100_poss_margin = res[game['team_abbr']] - res[game['opp_abbr']]
+                true_100_poss_margin = game['margin'] / game['pace'] * 100
+                if game['team_abbr'] == team:
+                    if game['location'] == 'Home':
+                        pred_100_poss_margin -= hca_val * 100 / game['pace']
+                    elif game['location'] == 'Away':
+                        pred_100_poss_margin += hca_val * 100 / game['pace']
+                else:
+                    true_100_poss_margin = -true_100_poss_margin
+                    pred_100_poss_margin = -pred_100_poss_margin
+                    if game['location'] == 'Home': # team of interest is playing away
+                        pred_100_poss_margin += hca_val * 100 / game['pace']
+                    elif game['location'] == 'Away': # team of interest is playing home
+                        pred_100_poss_margin -= hca_val * 100 / game['pace']
+                error = true_100_poss_margin - pred_100_poss_margin
+                if error < 0 and error < -loop_cap:
+                    error = -loop_cap
+                elif error > 0 and error > loop_cap:
+                    error = loop_cap
+                errors.append(error)
+            res[team] = res[team] + np.mean(errors)
+            # print(i+1, team, 'Prev EM Rating', round(res[team] - np.mean(errors), 2), 'Adjustment:', round(np.mean(errors), 2), 'EM Rating:', round(res[team], 2))
     return res
 
-def em_ratings_2(big_df, reg, em_ratings_dict, recent_game_scores):
+def em_ratings_2(big_df, reg, ratings_dict, recent_game_scores):
+    #TODO: maybe change recent game scores to reflect adj_em_ratings rather than eigenvector ratings
     # these are really like recent em ratings because they factor in most recent games
     res = {}
-    median_rating = np.median([v for v in em_ratings_dict.values()])
-    median_most_recent_game_score = np.median([v[-1] for v in recent_game_scores.values()])
-    for team in em_ratings_dict.keys():
+    # could consider using median as well
+    mean_rating = np.mean([v for v in ratings_dict.values()])
+    mean_most_recent_gs = np.mean([v[-1] for v in recent_game_scores.values()])
+    for team in ratings_dict.keys():
         team_df = big_df[(big_df['team_abbr'] == team) | (big_df['opp_abbr'] == team)]
         team_mean_pace = np.mean(team_df['pace'])
-        team_rating = em_ratings_dict[team]
-        opp_rating = median_rating
+        team_rating = ratings_dict[team]
+        opp_rating = mean_rating
         # technically should be doing this after split TODO
         team_rating_times_opp_rating = team_rating * opp_rating
         # location_to_numeric = {'Home': 1, 'Away': -1, 'Neutral': 0}
@@ -369,9 +422,9 @@ def em_ratings_2(big_df, reg, em_ratings_dict, recent_game_scores):
         team_most_recent_1 = recent_game_scores[team][-1]
         team_most_recent_2 = recent_game_scores[team][-2]
         team_most_recent_3 = recent_game_scores[team][-3]
-        opp_most_recent_1 = median_most_recent_game_score
-        opp_most_recent_2 = median_most_recent_game_score
-        opp_most_recent_3 = median_most_recent_game_score
+        opp_most_recent_1 = mean_most_recent_gs
+        opp_most_recent_2 = mean_most_recent_gs
+        opp_most_recent_3 = mean_most_recent_gs
         pred_pace = team_mean_pace
         data = np.array([team_rating, opp_rating, team_rating_times_opp_rating, location_numeric, team_most_recent_1, team_most_recent_2, team_most_recent_3, opp_most_recent_1, opp_most_recent_2, opp_most_recent_3, pred_pace])
         df = pd.DataFrame(data=data.reshape(1, 11))
@@ -379,8 +432,38 @@ def em_ratings_2(big_df, reg, em_ratings_dict, recent_game_scores):
         res[team] = margin_per_poss[0]*100
     return res
 
+def write_rankings(r_dict, filename, df=None, extended=True):
+    if df is None:
+        extended = False
+    data = []
+    r_lst = [[k, v] for k, v in r_dict.items()]
+    r_lst.sort(key=lambda x: x[1], reverse=True)
+    if extended is False:
+        header = ['Rank', 'Team', 'Rating']
+        data.append(header)
+        for i, row in enumerate(r_lst):
+            data.append([i + 1, row[0], round(row[1], 2)])
+    elif extended:
+        conferences = {}
+        wins = {}
+        losses = {}
+        for team in Teams():
+            conferences[team.abbr] = team.conference
+            wins[team.abbr] = team.wins
+            losses[team.abbr] = team.losses
+    
+        header = ['Rank', 'Team', 'Rating', 'Conference', 'Wins', 'Losses']
+        for i, row in enumerate(r_lst):
+            data.append([i+1, row[0], round(row[1], 2), conferences[row[0]], wins[row[0]], losses[row[0]]])
+
+
+    with open(filename, 'w') as f:
+        writer = csv.writer(f)
+        writer.writerows(data)
+
+
 def main():
-    game_data = update_data(update_games=False)
+    game_data = update_data(update_games=True)
     write_data('data/game_data.csv', game_data)
     df = data_to_df(game_data)
     train_df, test_df = split_data(df)
@@ -392,7 +475,7 @@ def main():
     r_dct = {el[0]: el[1] for el in r_lst}
     rmse, reg, df = calc_margin_error(df, r_dct)
 
-    # need to make its own function to get em_rating
+    # TODO: need to make its own function to get em_rating
     mean_rating = np.mean([row[1] for row in r_lst])
     neutral_location_numeric = 0
     em_ratings_dict = {}
@@ -413,15 +496,29 @@ def main():
     big_df = add_to_df(df.copy(), r_dct, em_ratings_dict)
     game_scores_by_team_dict = get_game_scores_by_team(big_df)
 
-    # adj_em_ratings_dict = adj_em(df, reg, em_ratings_dict, game_scores_by_team_dict)
-
     margin_pred_rmse, margin_pred_reg, margin_pred_df = predict_margin(big_df, em_ratings_dict, game_scores_by_team_dict)
     print(margin_pred_rmse)
 
-    em_2 = em_ratings_2(big_df, margin_pred_reg, em_ratings_dict, game_scores_by_team_dict)
+    # RATINGS WITHOUT RECENT GAMES
+    print('\n RATINGS WITHOUT RECENT GAMES')
+    adj_em_ratings_dict = adj_em(df, reg, em_ratings_dict, game_scores_by_team_dict)
+    show_rankings([[k, v] for k, v in adj_em_ratings_dict.items()])
+
+    # RATINGS WITH RECENT GAMES
+    em_2 = em_ratings_2(big_df, margin_pred_reg, adj_em_ratings_dict, game_scores_by_team_dict)
+    print('\n RATINGS WITH RECENT GAMES')
     show_rankings([[k, v] for k, v in em_2.items()])
+    write_rankings(em_2, 'data/rankings.csv')
+    calc_margin_error(df, em_2)
 
-
+    teams = em_2.keys()
+    weighted_game_score_by_team_dict = {}
+    for team in teams:
+        print(team, game_score_weighted_avg(game_scores_by_team_dict[team], ))
+        weighted_game_score_by_team_dict[team] = game_score_weighted_avg(game_scores_by_team_dict[team])
+    
+    # print('\n WEIGHTED GAME SCORE BY TEAM')
+    # show_rankings([[k, v] for k, v in weighted_game_score_by_team_dict.items()])
 
 if __name__ == '__main__':
     main()
