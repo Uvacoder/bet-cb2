@@ -1,3 +1,4 @@
+from audioop import reverse
 from sklearn.linear_model import LinearRegression
 import numpy as np
 import pandas as pd
@@ -8,6 +9,7 @@ from datetime import datetime
 from scipy.sparse.linalg import eigs
 import csv
 from matplotlib import pyplot as plt
+from collections import OrderedDict as od
 
 location_numeric = {'Home': 1, 'Away': -1, 'Neutral': 0}
 hca_val = 4 #TODO
@@ -210,8 +212,26 @@ def calc_margin_error(df, ratings_dict):
     rmse = np.sqrt(np.mean((test_data['pred_margin'] - test_data['margin'])**2))
     return rmse, reg
 
+def three_most_recent_game_scores(row, team, game_scores):
+    # get most recent game scores for team
+    team_scores = game_scores[team]
+    team_scores = od(sorted(team_scores.items(), key=lambda x: x[0]))
+    team_recents = []
+    for i, (dt, score) in enumerate(team_scores.items()):
+        if dt > row['datetime']:
+            break
+        team_recents.append(score)
 
-def predict_margin(df, em_ratings_dict, recent_game_scores):
+    if len(team_recents) > 3:
+        return team_recents[-3:]
+    else:
+        return [None] * (3 - len(team_recents)) + team_recents
+    # get most recent game scores for each team
+
+
+
+
+def predict_margin(df, em_ratings_dict, game_scores):
     from sklearn.linear_model import LinearRegression
     df['margin'] = df.apply(lambda row: row['pf'] - row['pa'], axis=1)
     df['team_rating'] = df.apply(lambda row: em_ratings_dict[row['team_abbr']], axis=1)
@@ -220,24 +240,29 @@ def predict_margin(df, em_ratings_dict, recent_game_scores):
     df['team_rating*opp_rating'] = df['team_rating'] * df['opp_rating']
     location_to_numeric = {'Home': 1, 'Away': -1, 'Neutral': 0}
     df['location_numeric'] = df.apply(lambda row: location_to_numeric[row['location']], axis=1)
-    df['team_most_recent_1'] = df.apply(lambda row: recent_game_scores[row['team_abbr']][-1], axis=1)
-    df['team_most_recent_2'] = df.apply(lambda row: recent_game_scores[row['team_abbr']][-2], axis=1)
-    df['team_most_recent_3'] = df.apply(lambda row: recent_game_scores[row['team_abbr']][-3], axis=1)
-    df['opp_most_recent_1'] = df.apply(lambda row: recent_game_scores[row['opp_abbr']][-1], axis=1)
-    df['opp_most_recent_2'] = df.apply(lambda row: recent_game_scores[row['opp_abbr']][-2], axis=1)
-    df['opp_most_recent_3'] = df.apply(lambda row: recent_game_scores[row['opp_abbr']][-3], axis=1)  
 
-    train_data, test_data = split_data(df)
-    
+    # df['team_most_recent_3'] = df.apply(lambda row: three_most_recent_game_scores(row, row['team_abbr'], game_scores), axis=1)
+    # df['team_gs1'] = df.apply(lambda row: row['team_most_recent_3'][-1], axis=1)
+    # df['team_gs2'] = df.apply(lambda row: row['team_most_recent_3'][-2], axis=1)
+    # df['team_gs3'] = df.apply(lambda row: row['team_most_recent_3'][-3], axis=1)
+
+    # df['opp_most_recent_3'] = df.apply(lambda row: three_most_recent_game_scores(row, row['opp_abbr'], game_scores), axis=1)
+    # df['opp_gs1'] = df.apply(lambda row: row['opp_most_recent_3'][-1], axis=1)
+    # df['opp_gs2'] = df.apply(lambda row: row['opp_most_recent_3'][-2], axis=1)
+    # df['opp_gs3'] = df.apply(lambda row: row['opp_most_recent_3'][-3], axis=1)
+    # df[['team_most_recent_gs1', 'team_most_recent_gs2', 'team_most_recent_gs3', 'opp_most_recent_gs1', 'opp_most_recent_gs2', 'opp_most_recent_gs3']] = df.apply(lambda row: pd.Series(three_most_recent_game_scores(row, row['team_abbr'], game_scores)), axis=1)
+    # df[['team_gs1', 'team_gs2', 'team_gs3', 'opp_gs1', 'opp_gs2', 'opp_gs3']] = df[['team_gs1', 'team_gs2', 'team_gs3', 'opp_gs1', 'opp_gs2', 'opp_gs3']].fillna(method='bfill')
+
+    train_data, test_data = split_data(df)    
     # linear regression
     # location/hca should be dependent upon team
-    train_X = train_data[['team_rating', 'opp_rating', 'team_rating*opp_rating', 'location_numeric', 'team_most_recent_1', 'team_most_recent_2', 'team_most_recent_3', 'opp_most_recent_1', 'opp_most_recent_2', 'opp_most_recent_3', 'pace']].values
+    train_X = train_data[['team_rating', 'opp_rating', 'team_rating*opp_rating', 'location_numeric', 'team_most_recent_gs1', 'team_most_recent_gs2', 'team_most_recent_gs3', 'opp_most_recent_gs1', 'opp_most_recent_gs2', 'opp_most_recent_gs3', 'pace']].values
     y = train_data['margin'].values/train_data['pace'].values
     reg = LinearRegression(fit_intercept=False).fit(train_X, y)
 
     # test
     test_data['pred_pace'] = test_data.apply(lambda row: predict_pace(df, row['team_abbr'], row['opp_abbr']), axis=1)
-    test_X = test_data[['team_rating', 'opp_rating', 'team_rating*opp_rating', 'location_numeric', 'team_most_recent_1', 'team_most_recent_2', 'team_most_recent_3', 'opp_most_recent_1', 'opp_most_recent_2', 'opp_most_recent_3', 'pred_pace' ]].values
+    test_X = test_data[['team_rating', 'opp_rating', 'team_rating*opp_rating', 'location_numeric', 'team_most_recent_gs1', 'team_most_recent_gs2', 'team_most_recent_gs3', 'opp_most_recent_gs1', 'opp_most_recent_gs2', 'opp_most_recent_gs3', 'pred_pace' ]].values
     test_data['pred_net_efficiency'] = reg.predict(test_X)
     test_data['pred_margin'] = test_data['pred_net_efficiency'] * test_data['pred_pace']
     # use rmse as error metric for now
@@ -328,6 +353,7 @@ def transform_ratings(ratings_lst):
 
 
 def add_to_df(df, ratings_dict, rating_type):
+    # adds ratings and respective game scores based on ratings to df
     # rating type, e.g. eigen, em, adj_em
     opp_rating_col_name = rating_type + '_opp_rating'
     team_rating_col_name = rating_type + '_team_rating'
@@ -340,21 +366,44 @@ def add_to_df(df, ratings_dict, rating_type):
     return df
 
 
-def get_game_scores_by_team(df, team_col_name, opp_col_name):
-    # sorted by latest to most recent
-    res = {abbr:[] for abbr in df['team_abbr'].unique()}
-    for team in res.keys():
-        team_df = df[(df['team_abbr'] == team) | (df['opp_abbr'] == team)]
+def add_most_recent_gs_to_df(df):
+    #TODO this is only including games where the given team is home
+    res_df = df.copy()
+    res_df['team_most_recent_gs1'] = np.NaN
+    res_df['team_most_recent_gs2'] = np.NaN
+    res_df['team_most_recent_gs3'] = np.NaN
+    res_df['opp_most_recent_gs1'] = np.NaN
+    res_df['opp_most_recent_gs2'] = np.NaN
+    res_df['opp_most_recent_gs3'] = np.NaN
+
+    for team in df['team_abbr'].unique():
+        team_df = df[(df['team_abbr'] == team) | (df['opp_abbr'] == 
+        team)]
         team_df = team_df.sort_values(by='datetime', ascending=True)
-        for idx, row in team_df.iterrows():
-            if row['team_abbr'] == team:
-                res[team].append(row[team_col_name])
-            else:
-                res[team].append(row[opp_col_name])
-    return res
+        most_recent = [np.NaN, np.NaN, np.NaN]
+        for idx, row in team_df.iterrows(): #same idx from df (need to check)
+            # print(res_df.iloc[idx])
+            if row['team_abbr'] == team: # home
+                res_df.iloc[idx, res_df.columns.get_loc('team_most_recent_gs1')] = most_recent[-1]
+                res_df.iloc[idx, res_df.columns.get_loc('team_most_recent_gs2')] = most_recent[-2]
+                res_df.iloc[idx, res_df.columns.get_loc('team_most_recent_gs3')] = most_recent[-3]
+                most_recent.pop(0)
+                most_recent.append(row['adj_em_team_game_score'])
+            else: # away
+                res_df.iloc[idx, res_df.columns.get_loc('opp_most_recent_gs1')] = most_recent[-1]
+                res_df.iloc[idx, res_df.columns.get_loc('opp_most_recent_gs2')] = most_recent[-2]
+                res_df.iloc[idx, res_df.columns.get_loc('opp_most_recent_gs3')] = most_recent[-3]
+                most_recent.pop(0)
+                most_recent.append(row['adj_em_opp_game_score'])
+
+    #fillna bfill
+    df = res_df
+    df[['team_most_recent_gs1', 'team_most_recent_gs2', 'team_most_recent_gs3', 'opp_most_recent_gs1', 'opp_most_recent_gs2', 'opp_most_recent_gs3']] = df[['team_most_recent_gs1', 'team_most_recent_gs2', 'team_most_recent_gs3', 'opp_most_recent_gs1', 'opp_most_recent_gs2', 'opp_most_recent_gs3']].fillna(method='bfill')
+
+    return df
 
 
-def game_score_weighted_avg(scores, k = 10):
+def game_score_weighted_avg(scores_dct, k = 10):
     # sort game scores dict by key
     # assumes dict is sorted from most recent to oldest
     # uses geometric series to weight scores
@@ -364,6 +413,7 @@ def game_score_weighted_avg(scores, k = 10):
     # then we need a = 1/(k-1)
     # because our sum is not infinite we cut off at the last game and give the last score all the weight that is left
 
+    scores = list(scores_dct.values())
     weights = []
     remaining_weight = 1
     for i in range(len(scores)):
@@ -431,15 +481,17 @@ def adj_em(df, em_ratings_dict, loops=10):
     return em_ratings_lst, em_ratings_dct
 
 
-def em_ratings_2(big_df, reg, ratings_dict, recent_game_scores):
+def em_ratings_2(df1, reg, ratings_dict):
     #TODO: maybe change recent game scores to reflect adj_em_ratings rather than eigenvector ratings
     # these are really like recent em ratings because they factor in most recent games
     res = {}
+    df = df1.copy()
     # could consider using median as well
     mean_rating = np.mean([v for v in ratings_dict.values()])
-    mean_most_recent_gs = np.mean([v[-1] for v in recent_game_scores.values()])
+    mean_most_recent_gs = df['adj_em_team_game_score'].mean()
     for team in ratings_dict.keys():
-        team_df = big_df[(big_df['team_abbr'] == team) | (big_df['opp_abbr'] == team)]
+        team_df = df[(df['team_abbr'] == team) | (df['opp_abbr'] == team)]
+        team_df.sort_values(by='datetime', ascending=True)
         team_mean_pace = np.mean(team_df['pace'])
         team_rating = ratings_dict[team]
         opp_rating = mean_rating
@@ -447,16 +499,15 @@ def em_ratings_2(big_df, reg, ratings_dict, recent_game_scores):
         team_rating_times_opp_rating = team_rating * opp_rating
         # location_to_numeric = {'Home': 1, 'Away': -1, 'Neutral': 0}
         location_numeric = 0
-        team_most_recent_1 = recent_game_scores[team][-1]
-        team_most_recent_2 = recent_game_scores[team][-2]
-        team_most_recent_3 = recent_game_scores[team][-3]
+        # TODO: change from dict structure to make sure it is ordered by date
+        team_most_recent_1, team_most_recent_2, team_most_recent_3 = team_df['adj_em_team_game_score'].iloc[-3:].tolist()
         opp_most_recent_1 = mean_most_recent_gs
         opp_most_recent_2 = mean_most_recent_gs
         opp_most_recent_3 = mean_most_recent_gs
         pred_pace = team_mean_pace
         data = np.array([team_rating, opp_rating, team_rating_times_opp_rating, location_numeric, team_most_recent_1, team_most_recent_2, team_most_recent_3, opp_most_recent_1, opp_most_recent_2, opp_most_recent_3, pred_pace])
-        df = pd.DataFrame(data=data.reshape(1, 11))
-        margin_per_poss = reg.predict(df.values)
+        df_res = pd.DataFrame(data=data.reshape(1, 11))
+        margin_per_poss = reg.predict(df_res.values)
         res[team] = margin_per_poss[0]*100
     ratings_dct = res
     ratings_lst = [[k, v] for k, v in ratings_dct.items()]
@@ -508,13 +559,24 @@ def write_rankings(filename, rating_tuples_lst, extended=True):
         writer = csv.writer(f)
         writer.writerows(data)
 
-    for row in data:
-        print('\t'.join([str(el) for el in row]))
-
 def choose_coef(df):
     train_df, test_df = split_data(df)
     best_coef = test_log_coef(train_df, test_df)
     return best_coef
+
+def get_game_scores_by_team(df):
+    res = {}
+    for team in Teams():
+        team_df = df[(df['team_abbr'] == team.abbreviation) | (df['opp_abbr'] == team.abbreviation)]
+        team_df.sort_values(by='datetime', ascending=True)
+        scores = []
+        for idx, row in team_df.iterrows():
+            if row['team_abbr'] == team.abbreviation:
+                scores.append(row['adj_em_team_game_score'])
+            else:
+                scores.append(row['adj_em_opp_game_score'])
+        res[team.abbreviation] = scores
+    return res
 
 
 def main():
@@ -522,10 +584,12 @@ def main():
     write_data('data/game_data.csv', game_data)
     df = data_to_df(game_data)
     teams = df['team_abbr'].unique().tolist()
-    best_coef = choose_coef(df)
+    # best_coef = choose_coef(df)
+    best_coef = 2
 
     mat = normalize_mat(get_adj_mat(df, k=best_coef))
     eigenratings_lst, eigenratings_dct = eigenrank(mat)
+    
     # making vector normally distributed
     eigenratings_lst = transform_ratings(eigenratings_lst)
     eigenratings_dct = {el[0]: el[1] for el in eigenratings_lst}
@@ -543,19 +607,16 @@ def main():
     show_rankings(adj_em_ratings_lst)
 
     # predicting
-    adj_em_game_scores_by_team_dct = get_game_scores_by_team(df, 'adj_em_team_game_score', 'adj_em_opp_game_score')
-    margin_pred_rmse, margin_pred_reg, margin_pred_df = predict_margin(df, adj_em_ratings_dct, adj_em_game_scores_by_team_dct)
+    df = add_most_recent_gs_to_df(df)
+    games_scores_by_team = get_game_scores_by_team(df)
+    margin_pred_rmse, margin_pred_reg, margin_pred_df = predict_margin(df, adj_em_ratings_dct, games_scores_by_team)
     print(margin_pred_rmse)
 
     # RATINGS WITH RECENT GAMES
-    em_with_recency_ratings_lst, em_with_recency_ratings_dct = em_ratings_2(df, margin_pred_reg, adj_em_ratings_dct, adj_em_game_scores_by_team_dct)
+    em_with_recency_ratings_lst, em_with_recency_ratings_dct = em_ratings_2(df, margin_pred_reg, adj_em_ratings_dct)
     print('\n RATINGS WITH RECENT GAMES')
     show_rankings(em_with_recency_ratings_lst)
     calc_margin_error(df, em_with_recency_ratings_dct)
-
-    weighted_game_score_by_team_dict = {}
-    for team in teams:
-        weighted_game_score_by_team_dict[team] = game_score_weighted_avg(adj_em_game_scores_by_team_dct[team])
 
     included_rating_tuples = [ ('em rating', em_ratings_lst), ('em with recency bias', em_with_recency_ratings_lst) ]
     
