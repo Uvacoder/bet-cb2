@@ -12,7 +12,7 @@ from matplotlib import pyplot as plt
 from collections import OrderedDict as od
 
 location_numeric = {'Home': 1, 'Away': -1, 'Neutral': 0}
-hca_val = 4 #TODO
+hca_val = 2.3 #TODO
 game_features = ['index', 'team_abbr', 'opp_abbr', 'pf', 'pa', 'pace', 'location', 'datetime', 'true_pace']
 team_idxs = {team_name: idx for idx, team_name in enumerate([team.abbreviation for team in Teams()])}
 team_abbrevs = []
@@ -30,21 +30,27 @@ def has_game_happened(game):
 
 
 def has_pace(game):
-    return game.boxscore.pace is not None
+    try:
+        return game.boxscore.pace is not None
+    except:
+        return False
 
 
 def calculate_pace(bs_index):
     # using old kenpom formula https://kenpom.com/blog/the-possession/
     # (FGA – OFFR) + TO + (Y * FTA)
     # Y = 0.44
-    bs = Boxscore(bs_index)
-    fga = bs.home_field_goal_attempts + bs.away_field_goal_attempts
-    offr = bs.home_offensive_rebounds + bs.away_offensive_rebounds
-    to = bs.home_turnovers + bs.away_turnovers
-    y = 0.44
-    fta = bs.home_free_throw_attempts + bs.away_free_throw_attempts
-    est_pace = (fga - offr) + to + (y * fta)
-    return est_pace
+    try:
+        bs = Boxscore(bs_index)
+        fga = bs.home_field_goal_attempts + bs.away_field_goal_attempts
+        offr = bs.home_offensive_rebounds + bs.away_offensive_rebounds
+        to = bs.home_turnovers + bs.away_turnovers
+        y = 0.44
+        fta = bs.home_free_throw_attempts + bs.away_free_throw_attempts
+        est_pace = (fga - offr) + to + (y * fta)
+        return est_pace
+    except:
+        return 70 #TODO: not this
 
 
 def load_data_from_csv(filename):
@@ -83,7 +89,14 @@ def update_data(update_games=True):
                 if data[0] not in tracked_games:
                     print(data)
                     res.append(data)
+    for row in res:
+        if row[-1] is False and row[5] == 0:
+            row[5] = 70
+    for row in res:
+        if row[5] == 0:
+            print(row)
     return res
+
 
 
 def write_data(filename, data_lst):
@@ -247,6 +260,7 @@ def margin_error_only_ratings(test_df, ratings_dict):
     test_df['margin'] = test_df.apply(lambda row: row['pf'] - row['pa'], axis=1)
     X = test_df[['team_rating', 'opp_rating', 'location_numeric']].values
     y = test_df['margin'].values/test_df['pace'].values
+    print(X.min(), X.max(), y.min(), y.max())
     reg = LinearRegression(fit_intercept=False).fit(X, y)
     test_df['pred_net_efficiency'] = reg.predict(X)
     test_df['pred_margin'] = test_df['pred_net_efficiency'] * test_df['pace']
@@ -326,8 +340,8 @@ def add_to_df(df, ratings_dict, rating_type):
     team_game_score_col_name = rating_type + '_team_game_score'
     df[opp_rating_col_name] = df.apply(lambda row: ratings_dict[row['opp_abbr']], axis=1)
     df[team_rating_col_name] = df.apply(lambda row: ratings_dict[row['team_abbr']], axis=1)
-    df[opp_game_score_col_name] = df.apply(lambda row: ratings_dict[row['opp_abbr']] * (row['pa'] - row['pf'] + hca_val * -location_numeric[row['location']]), axis=1)
-    df[team_game_score_col_name] = df.apply(lambda row: ratings_dict[row['team_abbr']] * (row['pf'] - row['pa'] + hca_val * location_numeric[row['location']]), axis=1)
+    df[opp_game_score_col_name] = df.apply(lambda row: ratings_dict[row['team_abbr']] * ( margin_utility((row['pa'] - row['pf'] + hca_val * -location_numeric[row['location']])/row['pace'], k=4) + .5)**2, axis=1)
+    df[team_game_score_col_name] = df.apply(lambda row: ratings_dict[row['opp_abbr']] * ( margin_utility((row['pf'] - row['pa'] + hca_val * location_numeric[row['location']])/row['pace'], k=4) + .5)**2, axis=1)
     return df
 
 
@@ -372,20 +386,23 @@ def game_score_weighted_avg(scores_dct, k = 10):
     # then for the sum from 1 to inf a(r^n) = sum a ((k-1)/k)^n =  a(k-1)
     # then we need a = 1/(k-1)
     # because our sum is not infinite we cut off at the last game and give the last score all the weight that is left
+    weighted_scores_dct = {}
+    for team in scores_dct.keys():
 
-    scores = list(scores_dct.values())
-    weights = []
-    remaining_weight = 1
-    for i in range(len(scores)):
-        if i == len(scores) - 1:
-            weights.append(remaining_weight)
-        else:
-            w = (1/(k-1)) * ((k-1)/k)**(i+1)
-            weights.append(w)
-            remaining_weight -= w
-    
-    weighted_scores = sum([score * weight for score, weight in zip(scores, weights)])
-    return weighted_scores
+        scores = scores_dct[team]
+        weights = []
+        remaining_weight = 1
+        for i in range(len(scores)):
+            if i == len(scores) - 1:
+                weights.append(remaining_weight)
+            else:
+                w = (1/(k-1)) * ((k-1)/k)**(i+1)
+                weights.append(w)
+                remaining_weight -= w
+        
+        weighted_score = sum([score * weight for score, weight in zip(scores, weights)])
+        weighted_scores_dct[team] = weighted_score
+    return weighted_scores_dct
 
 
 def em_ratings(df, r_lst, r_dct):
@@ -546,8 +563,22 @@ def get_game_scores_by_team(df):
     return res
 
 
+def get_rankings_html(filename):
+    # takes csv file and turns into html table
+    html = ''
+    html += '<table border="1">'
+    with open(filename, 'r') as f:
+        reader = csv.reader
+        for row in reader(f):
+            html += '<tr>'
+            for col in row:
+                html += '<td>' + col + '</td>'
+            html += '</tr>'
+    html += '</table>'
+    return html
+
 def main():
-    game_data = update_data(update_games=False)
+    game_data = update_data(update_games=True)
     write_data('data/game_data.csv', game_data)
     df = data_to_df(game_data)
     teams = df['team_abbr'].unique().tolist()
@@ -575,6 +606,11 @@ def main():
     # predicting
     df = add_most_recent_gs_to_df(df)
     games_scores_by_team = get_game_scores_by_team(df)
+    game_score_weighted_avg_dct = game_score_weighted_avg(games_scores_by_team)
+    with open('data/weighted_avg_game_score.csv', 'w') as f:
+        writer = csv.writer(f)
+        for key, value in game_score_weighted_avg_dct.items():
+            writer.writerow([key, value])
     margin_pred_rmse, margin_pred_reg, margin_pred_df = predict_margin(df, adj_em_ratings_dct, games_scores_by_team)
     print(margin_pred_rmse)
 
@@ -582,6 +618,8 @@ def main():
     em_with_recency_ratings_lst, em_with_recency_ratings_dct = em_ratings_2(df, margin_pred_reg, adj_em_ratings_dct)
     print('\n RATINGS WITH RECENT GAMES')
     show_rankings(em_with_recency_ratings_lst)
+    margin_pred_rmse, margin_pred_reg, margin_pred_df = predict_margin(df, em_with_recency_ratings_dct, games_scores_by_team)
+    print(margin_pred_rmse)
     calc_margin_error(df, em_with_recency_ratings_dct)
 
     included_rating_tuples = [ ('adj em rating', adj_em_ratings_lst), ('em with recency bias', em_with_recency_ratings_lst) ]
@@ -589,6 +627,9 @@ def main():
     write_rankings('data/rankings.csv', rating_tuples_lst=included_rating_tuples, extended=True)
 
     df.to_csv('data/game_data_with_ratings.csv')
+
+    html = get_rankings_html('data/rankings.csv')
+    print(html)
 
 if __name__ == '__main__':
     main()

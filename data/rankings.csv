@@ -1,359 +1,359 @@
 rank,team,adj em rating,em with recency bias,conference,wins,losses
-1,gonzaga,33.46,34.0,wcc,24,3
-2,ucla,29.49,29.8,pac-12,23,6
-3,duke,29.37,29.62,acc,26,5
-4,houston,31.63,29.26,aac,26,4
-5,arizona,30.45,28.67,pac-12,28,3
-6,tennessee,28.27,28.57,sec,23,7
-7,baylor,29.35,28.5,big-12,26,5
-8,auburn,29.41,28.36,sec,27,4
-9,kentucky,28.02,27.9,sec,25,6
-10,purdue,26.72,26.88,big-ten,25,6
-11,iowa,27.57,26.77,big-ten,22,8
-12,kansas,27.4,26.45,big-12,25,6
-13,texas tech,26.33,26.0,big-12,23,8
-14,arkansas,25.22,25.4,sec,24,7
-15,villanova,24.08,24.44,big-east,23,7
-16,louisiana state,24.09,24.15,sec,21,10
-17,connecticut,24.59,23.98,big-east,22,8
-18,illinois,24.34,23.68,big-ten,21,8
-19,texas,24.3,23.42,big-12,21,10
-20,providence,22.17,22.58,big-east,24,4
-21,ohio state,22.14,22.55,big-ten,19,9
-22,saint marys ca,21.63,22.3,wcc,24,6
-23,wake forest,20.84,21.77,acc,23,8
-24,alabama,20.61,20.83,sec,19,12
-25,colorado state,20.62,20.69,mwc,24,4
-26,san francisco,20.26,20.64,wcc,24,8
-27,boise state,20.33,20.42,mwc,24,7
-28,wisconsin,19.95,20.12,big-ten,24,5
-29,north carolina,19.72,19.92,acc,23,8
-30,san diego state,19.71,19.47,mwc,21,7
-31,michigan,19.53,19.16,big-ten,16,13
-32,oregon,17.78,18.53,pac-12,18,13
-33,marquette,19.26,18.38,big-east,19,11
-34,florida,18.14,18.14,sec,19,12
-35,oklahoma,18.34,18.12,big-12,17,14
-36,seton hall,18.18,18.08,big-east,20,9
-37,texas am,17.81,17.98,sec,20,11
-38,southern methodist,18.0,17.86,aac,21,7
-39,texas christian,17.75,17.83,big-12,19,11
-40,indiana,17.75,17.83,big-ten,18,12
-41,loyola il,18.49,17.76,mvc,24,7
-42,michigan state,17.04,17.7,big-ten,19,11
-43,oklahoma state,17.83,17.48,big-12,15,15
-44,memphis,17.46,16.91,aac,18,9
-45,iowa state,17.36,16.68,big-12,20,11
-46,mississippi state,16.67,16.65,sec,17,14
-47,colorado,16.86,16.56,pac-12,20,10
-48,southern california,16.17,16.37,pac-12,25,6
-49,maryland,17.13,16.21,big-ten,15,15
-50,xavier,15.99,16.2,big-east,18,12
-51,creighton,16.27,16.14,big-east,20,10
-52,davidson,16.03,16.13,atlantic-10,25,5
-53,brigham young,15.64,15.92,wcc,22,10
-54,alabama birmingham,16.36,15.76,cusa,24,7
-55,washington state,14.8,15.54,pac-12,18,13
-56,st johns ny,16.14,15.23,big-east,16,14
-57,saint louis,15.69,15.21,atlantic-10,21,10
-58,west virginia,15.13,15.15,big-12,15,16
-59,miami fl,15.23,15.1,acc,22,9
-60,virginia,15.08,15.07,acc,18,12
-61,notre dame,15.91,15.03,acc,22,9
-62,virginia tech,15.11,14.95,acc,19,12
-63,vanderbilt,15.21,14.93,sec,15,15
-64,dayton,14.54,14.7,atlantic-10,22,9
-65,kansas state,14.6,14.62,big-12,14,16
-66,st bonaventure,14.07,14.38,atlantic-10,20,8
-67,virginia commonwealth,14.4,14.12,atlantic-10,21,8
-68,fresno state,13.9,14.02,mwc,18,12
-69,wichita state,13.82,13.88,aac,15,12
-70,wyoming,13.52,13.46,mwc,24,7
-71,utah state,13.7,13.45,mwc,17,14
-72,arizona state,14.04,13.33,pac-12,14,16
-73,north texas,12.98,12.94,cusa,23,5
-74,toledo,13.13,12.92,mac,25,6
-75,penn state,13.58,12.86,big-ten,12,15
-76,northwestern,14.05,12.71,big-ten,13,15
-77,missouri state,12.87,12.62,mvc,23,10
-78,clemson,13.01,12.53,acc,16,15
-79,drake,12.67,12.42,mvc,24,9
-80,nevada las vegas,12.33,12.3,mwc,18,13
-81,mississippi,12.6,12.22,sec,13,18
-82,tulane,11.92,12.15,aac,13,13
-83,south carolina,12.99,12.07,sec,18,12
-84,central florida,11.79,12.07,aac,17,10
-85,rutgers,12.13,11.9,big-ten,17,12
-86,murray state,11.45,11.34,ovc,30,2
-87,bradley,10.94,11.23,mvc,17,14
-88,santa clara,11.06,11.05,wcc,21,10
-89,richmond,10.88,10.99,atlantic-10,19,12
-90,towson,10.82,10.96,colonial,24,7
-91,florida state,11.46,10.82,acc,17,13
-92,syracuse,10.92,10.65,acc,15,16
-93,minnesota,11.31,10.62,big-ten,13,15
-94,new mexico state,10.71,10.16,wac,24,6
-95,depaul,10.77,9.93,big-east,15,15
-96,grand canyon,10.14,9.89,wac,22,7
-97,washington,9.7,9.73,pac-12,16,14
-98,stanford,9.62,8.98,pac-12,15,15
-99,nebraska,9.26,8.87,big-ten,9,21
-100,south dakota state,9.07,8.77,summit,28,4
-101,cincinnati,8.16,8.57,aac,17,14
-102,belmont,8.55,8.48,ovc,25,7
-103,utah,8.61,8.14,pac-12,11,19
-104,furman,7.92,7.81,southern,21,11
-105,western kentucky,7.33,7.16,cusa,19,12
-106,iona,7.23,7.0,maac,25,6
-107,nevada,7.33,6.97,mwc,12,17
-108,temple,9.16,6.89,aac,16,11
-109,new mexico,6.64,6.66,mwc,13,18
-110,california,8.41,6.63,pac-12,12,19
-111,northern iowa,7.39,6.54,mvc,19,11
-112,middle tennessee,6.61,6.4,cusa,22,9
-113,louisville,6.03,6.25,acc,12,18
-114,butler,5.83,6.25,big-east,13,18
-115,north carolina state,6.41,6.17,acc,11,20
-116,hofstra,6.15,6.15,colonial,21,10
-117,louisiana tech,6.51,5.86,cusa,21,9
-118,missouri,5.84,5.77,sec,11,20
-119,georgetown,4.96,5.42,big-east,6,24
-120,stephen f austin,5.27,5.33,wac,22,8
-121,vermont,5.72,5.22,america-east,25,5
-122,george mason,5.19,4.93,atlantic-10,14,15
-123,georgia tech,4.87,4.72,acc,12,19
-124,rhode island,4.78,4.7,atlantic-10,14,15
-125,boston college,4.4,4.34,acc,11,19
-126,florida atlantic,3.95,3.87,cusa,18,13
-127,chattanooga,4.02,3.85,southern,25,7
-128,tulsa,3.93,3.82,aac,9,19
-129,east carolina,3.78,3.77,aac,15,14
-130,abilene christian,3.82,3.71,wac,20,9
-131,jacksonville state,3.67,3.54,atlantic-sun,21,10
-132,california santa barbara,3.49,3.26,big-west,16,10
-133,utah valley,3.47,2.9,wac,19,11
-134,ohio,2.91,2.73,mac,23,8
-135,princeton,2.95,2.6,ivy,22,5
-136,long beach state,2.52,2.31,big-west,18,11
-137,saint josephs,2.32,2.21,atlantic-10,11,18
-138,southern illinois,2.62,2.19,mvc,16,15
-139,charlotte,2.33,2.08,cusa,17,13
-140,liberty,1.79,1.64,atlantic-sun,22,11
-141,south alabama,1.76,1.62,sun-belt,19,11
-142,pittsburgh,2.44,1.61,acc,11,20
-143,seattle,1.88,1.43,wac,23,8
-144,wofford,1.57,1.38,southern,19,12
-145,texas el paso,1.46,1.35,cusa,18,12
-146,valparaiso,1.66,1.33,mvc,14,18
-147,texas state,1.44,1.27,sun-belt,21,7
-148,monmouth,1.47,1.21,maac,19,12
-149,oregon state,1.1,1.12,pac-12,3,27
-150,akron,1.13,1.1,mac,21,9
-151,fordham,1.16,0.94,atlantic-10,15,15
-152,morehead state,1.06,0.91,ovc,23,11
-153,jacksonville,1.02,0.84,atlantic-sun,21,9
-154,cal state fullerton,1.04,0.84,big-west,18,10
-155,north dakota state,0.93,0.66,summit,22,9
-156,saint peters,0.75,0.36,maac,16,11
-157,illinois state,0.46,0.36,mvc,13,20
-158,montana state,0.47,0.35,big-sky,24,7
-159,southern utah,0.57,0.34,big-sky,20,10
-160,buffalo,0.48,0.33,mac,19,10
-161,winthrop,0.49,0.23,big-south,23,8
-162,north carolina wilmington,0.42,0.21,colonial,21,8
-163,kent state,0.38,0.2,mac,21,9
-164,california riverside,0.39,0.2,big-west,16,11
-165,hawaii,0.69,0.18,big-west,16,10
-166,georgia state,0.28,0.13,sun-belt,16,10
-167,san diego,0.02,-0.14,wcc,15,16
-168,georgia,-0.13,-0.22,sec,6,25
-169,weber state,-0.05,-0.28,big-sky,20,11
-170,california irvine,-0.22,-0.43,big-west,15,9
-171,colgate,0.48,-0.46,patriot,21,11
-172,yale,-0.2,-0.51,ivy,17,11
-173,longwood,-0.59,-0.56,big-south,25,6
-174,florida gulf coast,-0.66,-0.65,atlantic-sun,21,11
-175,massachusetts,-0.5,-0.74,atlantic-10,14,16
-176,college of charleston,-0.83,-1.04,colonial,16,14
-177,loyola marymount,-0.92,-1.46,wcc,11,18
-178,california davis,-1.26,-1.46,big-west,12,10
-179,delaware,-1.42,-1.48,colonial,19,12
-180,cleveland state,-1.73,-1.57,horizon,20,9
-181,drexel,-1.36,-1.59,colonial,15,13
-182,appalachian state,-1.59,-1.67,sun-belt,19,13
-183,nicholls state,-1.51,-1.87,southland,21,10
-184,coastal carolina,-1.6,-1.87,sun-belt,16,13
-185,oral roberts,-1.76,-2.01,summit,18,11
-186,sam houston state,-2.05,-2.02,wac,18,13
-187,portland,-2.06,-2.14,wcc,18,14
-188,south florida,-1.86,-2.15,aac,8,21
-189,california baptist,-2.28,-2.18,wac,17,14
-190,george washington,-2.12,-2.35,atlantic-10,12,17
-191,troy,-2.1,-2.45,sun-belt,20,10
-192,samford,-2.4,-2.61,southern,21,10
-193,wright state,-2.61,-2.95,horizon,19,13
-194,wagner,-2.41,-2.98,northeast,21,5
-195,old dominion,-2.9,-3.04,cusa,13,18
-196,ipfw,-2.82,-3.19,horizon,21,10
-197,oakland,-2.86,-3.2,horizon,20,12
-198,arkansas state,-3.31,-3.52,sun-belt,18,11
-199,niagara,-3.23,-3.57,maac,14,15
-200,north carolina greensboro,-3.44,-3.64,southern,17,14
-201,dartmouth,-3.74,-3.66,ivy,9,16
-202,louisiana lafayette,-3.51,-3.7,sun-belt,15,14
-203,northern kentucky,-3.45,-3.73,horizon,19,11
-204,air force,-3.73,-3.74,mwc,11,17
-205,detroit mercy,-3.59,-3.75,horizon,14,15
-206,la salle,-3.66,-3.96,atlantic-10,10,18
-207,east tennessee state,-3.89,-3.99,southern,15,17
-208,marist,-3.69,-4.15,maac,14,15
-209,virginia military institute,-3.89,-4.21,southern,16,15
-210,south dakota,-4.06,-4.22,summit,18,11
-211,bryant,-4.36,-4.25,northeast,21,9
-212,missouri kansas city,-4.12,-4.28,summit,19,11
-213,brown,-4.49,-4.67,ivy,13,16
-214,northern colorado,-4.49,-4.71,big-sky,18,14
-215,gardner webb,-4.67,-4.93,big-south,18,13
-216,norfolk state,-4.57,-4.94,meac,21,6
-217,james madison,-5.12,-5.02,colonial,15,14
-218,marshall,-5.59,-5.78,cusa,11,20
-219,indiana state,-5.68,-5.79,mvc,11,20
-220,boston university,-5.78,-5.85,patriot,21,11
-221,tarleton state,-5.81,-5.91,wac,14,17
-222,bellarmine,-5.96,-6.14,atlantic-sun,19,13
-223,western illinois,-6.01,-6.26,summit,16,14
-224,harvard,-6.24,-6.27,ivy,13,13
-225,mercer,-6.33,-6.34,southern,16,17
-226,new hampshire,-6.0,-6.44,america-east,15,12
-227,cornell,-5.91,-6.45,ivy,15,10
-228,rice,-6.02,-6.48,cusa,15,15
-229,southeast missouri state,-6.48,-6.68,ovc,14,18
-230,eastern washington,-6.96,-6.85,big-sky,17,14
-231,navy,-6.4,-6.9,patriot,20,10
-232,northeastern,-6.97,-7.0,colonial,9,21
-233,north carolina asheville,-6.96,-7.11,big-south,16,14
-234,high point,-6.77,-7.13,big-south,14,18
-235,pepperdine,-6.94,-7.16,wcc,7,25
-236,rider,-7.25,-7.51,maac,12,18
-237,citadel,-7.38,-7.57,southern,13,18
-238,campbell,-7.54,-7.72,big-south,16,13
-239,elon,-8.06,-8.19,colonial,10,21
-240,pennsylvania,-8.14,-8.41,ivy,12,15
-241,stony brook,-7.66,-8.69,america-east,18,13
-242,texas san antonio,-8.37,-8.81,cusa,10,21
-243,fairfield,-8.47,-8.82,maac,14,17
-244,georgia southern,-8.8,-8.88,sun-belt,13,16
-245,manhattan,-8.68,-8.9,maac,15,14
-246,florida international,-8.83,-8.91,cusa,15,16
-247,youngstown state,-8.8,-8.92,horizon,18,14
-248,kennesaw state,-8.82,-9.02,atlantic-sun,13,18
-249,maryland baltimore county,-8.44,-9.06,america-east,16,13
-250,eastern kentucky,-8.55,-9.12,atlantic-sun,13,18
-251,quinnipiac,-9.0,-9.17,maac,12,16
-252,canisius,-9.18,-9.23,maac,11,20
-253,siena,-9.36,-9.29,maac,15,13
-254,louisiana monroe,-9.33,-9.45,sun-belt,13,18
-255,long island university,-9.07,-9.54,northeast,16,14
-256,texas arlington,-9.39,-9.57,sun-belt,11,18
-257,dixie state,-9.63,-9.78,wac,13,18
-258,texas southern,-9.46,-9.83,swac,15,12
-259,miami oh,-9.34,-10.07,mac,14,17
-260,southern,-10.09,-10.15,swac,17,13
-261,texas am corpus christi,-9.88,-10.25,southland,20,11
-262,tennessee state,-10.4,-10.25,ovc,14,18
-263,duquesne,-9.96,-10.25,atlantic-10,6,23
-264,loyola md,-10.5,-10.32,patriot,14,16
-265,montana,-10.21,-10.35,big-sky,18,13
-266,southeastern louisiana,-10.07,-10.37,southland,18,13
-267,pacific,-10.53,-10.41,wcc,8,22
-268,illinois chicago,-10.1,-10.41,horizon,14,16
-269,portland state,-10.37,-10.42,big-sky,12,16
-270,cal state bakersfield,-10.28,-10.47,big-west,8,18
-271,north florida,-10.88,-10.77,atlantic-sun,11,20
-272,howard,-10.22,-10.78,meac,16,12
-273,northern illinois,-10.67,-10.81,mac,9,21
-274,cal poly,-10.91,-10.91,big-west,7,20
-275,lipscomb,-10.85,-10.92,atlantic-sun,14,19
-276,massachusetts lowell,-10.62,-11.02,america-east,15,15
-277,new orleans,-10.65,-11.1,southland,17,12
-278,ball state,-10.92,-11.16,mac,14,16
-279,california san diego,-11.38,-11.38,big-west,13,16
-280,presbyterian,-11.35,-11.45,big-south,12,20
-281,mount st marys,-11.79,-11.57,northeast,14,16
-282,binghamton,-11.52,-12.08,america-east,11,16
-283,san jose state,-12.05,-12.19,mwc,8,22
-284,alcorn state,-13.15,-12.19,swac,15,15
-285,tennessee tech,-12.39,-12.6,ovc,11,21
-286,alabama state,-12.98,-12.9,swac,10,21
-287,south carolina upstate,-12.81,-12.97,big-south,14,16
-288,hartford,-12.62,-13.04,america-east,11,19
-289,radford,-13.42,-13.42,big-south,11,18
-290,army,-12.71,-13.42,patriot,15,16
-291,bowling green state,-13.19,-13.52,mac,13,18
-292,southern illinois edwardsville,-12.84,-13.53,ovc,11,21
-293,denver,-13.06,-13.55,summit,11,21
-294,evansville,-13.12,-13.58,mvc,6,24
-295,jackson state,-13.85,-13.66,swac,11,18
-296,merrimack,-14.4,-13.96,northeast,14,16
-297,western carolina,-14.4,-14.07,southern,11,21
-298,central michigan,-14.04,-14.24,mac,7,22
-299,north alabama,-14.41,-14.25,atlantic-sun,9,21
-300,lehigh,-13.58,-14.45,patriot,13,18
-301,eastern michigan,-13.97,-14.71,mac,10,21
-302,albany ny,-14.19,-14.72,america-east,13,17
-303,north carolina at,-15.0,-14.92,big-south,12,20
-304,idaho,-15.29,-15.07,big-sky,9,21
-305,sacramento state,-15.06,-15.1,big-sky,10,17
-306,stetson,-15.09,-15.12,atlantic-sun,11,19
-307,austin peay,-14.23,-15.12,ovc,12,17
-308,arkansas little rock,-14.8,-15.15,sun-belt,9,19
-309,cal state northridge,-14.88,-15.35,big-west,7,22
-310,prairie view,-15.14,-15.5,swac,8,18
-311,st thomas mn,-14.8,-15.9,summit,10,20
-312,tennessee martin,-15.28,-15.95,ovc,8,22
-313,western michigan,-15.67,-16.02,mac,8,23
-314,northwestern state,-15.63,-16.03,southland,9,22
-315,central arkansas,-15.63,-16.07,atlantic-sun,11,20
-316,robert morris,-16.28,-16.09,horizon,8,24
-317,south carolina state,-16.48,-16.25,meac,15,15
-318,coppin state,-16.38,-16.37,meac,7,22
-319,north carolina central,-17.0,-16.58,meac,15,14
-320,texas pan american,-16.65,-16.59,wac,8,22
-321,sacred heart,-16.96,-16.68,northeast,10,20
-322,milwaukee,-16.89,-16.74,horizon,10,22
-323,chicago state,-16.54,-16.85,wac,7,24
-324,st francis ny,-17.96,-16.88,northeast,10,20
-325,mcneese state,-17.04,-16.94,southland,10,21
-326,morgan state,-16.43,-17.02,meac,12,13
-327,william mary,-17.34,-17.24,colonial,5,27
-328,alabama am,-17.38,-17.38,swac,11,17
-329,florida am,-16.67,-17.52,swac,13,16
-330,lafayette,-17.18,-17.62,patriot,10,20
-331,southern mississippi,-17.59,-17.73,cusa,6,25
-332,green bay,-18.44,-17.78,horizon,5,25
-333,northern arizona,-18.19,-17.8,big-sky,9,22
-334,hampton,-17.34,-17.81,big-south,9,19
-335,houston baptist,-18.08,-17.99,southland,10,17
-336,bethune cookman,-17.24,-18.0,swac,9,21
-337,grambling,-18.17,-18.03,swac,11,19
-338,nebraska omaha,-18.33,-18.86,summit,5,25
-339,idaho state,-18.75,-19.08,big-sky,7,22
-340,north dakota,-19.31,-19.14,summit,6,25
-341,maryland eastern shore,-18.27,-19.25,meac,11,14
-342,incarnate word,-19.66,-20.06,southland,7,24
-343,njit,-19.64,-20.3,america-east,11,17
-344,columbia,-19.91,-20.33,ivy,4,22
-345,american,-20.08,-20.6,patriot,10,22
-346,lamar,-20.74,-20.75,wac,2,27
-347,holy cross,-21.3,-21.36,patriot,9,22
-348,bucknell,-20.37,-21.36,patriot,9,23
-349,arkansas pine bluff,-22.91,-22.14,swac,7,24
-350,saint francis pa,-21.32,-22.27,northeast,9,21
-351,charleston southern,-22.21,-22.83,big-south,6,25
-352,fairleigh dickinson,-22.8,-23.25,northeast,4,22
-353,maine,-23.14,-23.74,america-east,6,23
-354,mississippi valley state,-25.42,-25.08,swac,2,26
-355,central connecticut state,-27.39,-27.0,northeast,8,24
-356,delaware state,-28.36,-28.76,meac,2,25
-357,eastern illinois,-29.4,-29.31,ovc,5,26
-358,iupui,-29.44,-29.85,horizon,3,26
+1,gonzaga,33.85,34.71,wcc,27,3
+2,baylor,31.26,32.51,big-12,27,6
+3,houston,32.49,32.26,aac,30,5
+4,tennessee,32.41,31.74,sec,27,7
+5,kansas,30.89,29.74,big-12,29,6
+6,arizona,29.01,28.28,pac-12,32,3
+7,duke,26.03,27.71,acc,29,6
+8,ucla,27.87,27.62,pac-12,26,7
+9,auburn,28.52,27.51,sec,28,5
+10,kentucky,25.95,27.02,sec,26,8
+11,texas tech,27.6,27.0,big-12,26,9
+12,arkansas,25.12,26.76,sec,26,8
+13,iowa,26.15,25.68,big-ten,26,10
+14,purdue,25.98,25.16,big-ten,28,7
+15,texas,24.11,24.19,big-12,22,11
+16,villanova,24.9,24.09,big-east,27,7
+17,louisiana state,21.66,23.43,sec,22,12
+18,illinois,23.23,22.94,big-ten,23,9
+19,oklahoma,22.49,22.28,big-12,19,15
+20,memphis,22.55,22.19,aac,22,10
+21,connecticut,22.58,22.1,big-east,23,10
+22,saint marys ca,21.69,22.07,wcc,26,7
+23,boise state,19.53,21.0,mwc,27,8
+24,north carolina,21.32,20.85,acc,25,9
+25,ohio state,20.53,20.51,big-ten,20,11
+26,wake forest,20.57,20.44,acc,24,9
+27,iowa state,19.33,20.29,big-12,21,12
+28,san francisco,19.9,19.95,wcc,24,10
+29,providence,20.08,19.65,big-east,26,5
+30,texas christian,19.52,19.28,big-12,21,12
+31,colorado state,18.86,19.24,mwc,25,6
+32,oklahoma state,18.08,19.01,big-12,15,15
+33,alabama birmingham,16.47,18.96,cusa,27,8
+34,indiana,19.23,18.94,big-ten,21,14
+35,san diego state,18.6,18.6,mwc,23,9
+36,virginia tech,17.99,18.13,acc,23,13
+37,michigan state,18.16,18.1,big-ten,23,12
+38,michigan,18.46,18.06,big-ten,18,14
+39,florida,17.01,17.95,sec,20,13
+40,southern methodist,18.04,17.7,aac,24,8
+41,loyola il,17.58,17.69,mvc,25,8
+42,creighton,17.72,17.58,big-east,23,11
+43,texas am,17.81,16.89,sec,24,12
+44,wisconsin,17.04,16.71,big-ten,25,7
+45,alabama,17.23,16.63,sec,19,14
+46,oregon,16.73,16.5,pac-12,20,14
+47,st johns ny,17.27,16.43,big-east,17,15
+48,colorado,16.31,16.32,pac-12,21,12
+49,brigham young,16.78,16.11,wcc,23,10
+50,vanderbilt,16.73,16.03,sec,18,16
+51,miami fl,16.49,16.01,acc,24,10
+52,davidson,16.4,15.98,atlantic-10,27,7
+53,notre dame,16.22,15.83,acc,24,10
+54,marquette,14.83,15.81,big-east,19,13
+55,virginia commonwealth,16.06,15.61,atlantic-10,22,9
+56,southern california,15.61,15.57,pac-12,26,8
+57,kansas state,15.38,15.28,big-12,14,17
+58,maryland,15.42,15.11,big-ten,15,17
+59,seton hall,15.52,15.01,big-east,21,11
+60,murray state,13.99,14.8,ovc,31,2
+61,new mexico state,14.53,14.68,wac,27,6
+62,west virginia,15.53,14.65,big-12,16,17
+63,saint louis,15.32,14.63,atlantic-10,23,12
+64,virginia,15.06,14.59,acc,20,13
+65,st bonaventure,14.49,14.31,atlantic-10,21,9
+66,north texas,14.26,14.25,cusa,25,6
+67,utah state,14.55,14.2,mwc,18,16
+68,mississippi state,14.29,14.18,sec,18,16
+69,dayton,14.67,14.17,atlantic-10,24,10
+70,washington state,14.72,14.15,pac-12,20,14
+71,richmond,14.14,13.73,atlantic-10,24,12
+72,arizona state,13.62,13.34,pac-12,14,17
+73,clemson,13.72,12.98,acc,17,16
+74,penn state,13.85,12.94,big-ten,14,17
+75,wyoming,12.56,12.43,mwc,25,9
+76,missouri state,11.88,12.35,mvc,23,11
+77,vermont,11.56,12.34,america-east,28,6
+78,rutgers,12.63,12.31,big-ten,18,14
+79,northwestern,12.5,12.23,big-ten,15,16
+80,wichita state,12.7,12.18,aac,15,13
+81,syracuse,12.64,12.08,acc,16,17
+82,santa clara,12.83,12.08,wcc,21,12
+83,xavier,12.12,11.94,big-east,19,13
+84,florida state,10.83,11.51,acc,17,14
+85,south carolina,12.15,11.27,sec,18,13
+86,fresno state,10.25,10.85,mwc,20,13
+87,drake,11.52,10.46,mvc,24,10
+88,stanford,10.57,10.43,pac-12,16,16
+89,washington,10.48,10.24,pac-12,17,15
+90,tulane,10.27,10.09,aac,14,15
+91,nevada las vegas,10.21,10.06,mwc,18,14
+92,bradley,10.36,10.03,mvc,17,14
+93,nebraska,9.49,9.98,big-ten,10,22
+94,south dakota state,9.91,9.87,summit,30,5
+95,temple,9.88,9.74,aac,17,12
+96,mississippi,9.83,9.55,sec,13,19
+97,grand canyon,8.82,9.54,wac,23,8
+98,chattanooga,8.75,9.54,southern,27,8
+99,toledo,9.5,9.46,mac,26,8
+100,depaul,9.9,9.15,big-east,15,16
+101,cincinnati,9.24,9.01,aac,18,15
+102,northern iowa,8.69,8.39,mvc,20,11
+103,towson,8.34,8.23,colonial,25,9
+104,iona,7.5,8.11,maac,25,8
+105,minnesota,8.09,7.78,big-ten,13,17
+106,nevada,7.96,7.71,mwc,13,18
+107,belmont,7.79,7.65,ovc,25,8
+108,utah,7.46,7.49,pac-12,11,20
+109,central florida,7.69,7.48,aac,18,12
+110,middle tennessee,7.6,7.2,cusa,23,10
+111,louisiana tech,8.01,7.18,cusa,24,10
+112,missouri,7.38,7.02,sec,12,21
+113,western kentucky,7.24,6.68,cusa,19,13
+114,furman,7.13,6.61,southern,22,12
+115,butler,6.65,6.46,big-east,14,19
+116,george mason,5.42,6.44,atlantic-10,14,16
+117,abilene christian,5.17,6.41,wac,23,10
+118,north carolina state,6.17,6.2,acc,11,21
+119,boston college,6.45,6.08,acc,13,20
+120,louisville,7.06,6.04,acc,13,19
+121,california,6.35,5.62,pac-12,12,20
+122,saint peters,5.66,5.6,maac,20,11
+123,akron,4.55,5.12,mac,24,10
+124,hofstra,4.76,4.45,colonial,21,11
+125,georgia state,3.14,4.44,sun-belt,18,11
+126,colgate,4.09,4.31,patriot,23,12
+127,rhode island,4.31,4.16,atlantic-10,15,16
+128,georgia tech,4.96,3.8,acc,12,20
+129,new mexico,3.92,3.64,mwc,13,19
+130,cal state fullerton,3.0,3.64,big-west,21,11
+131,jacksonville state,3.77,3.62,atlantic-sun,21,11
+132,georgetown,4.51,3.58,big-east,6,25
+133,stephen f austin,4.16,3.52,wac,22,9
+134,southern illinois,3.6,3.37,mvc,16,15
+135,texas state,3.24,3.36,sun-belt,21,8
+136,utah valley,3.35,3.12,wac,20,12
+137,tulsa,3.26,3.03,aac,11,20
+138,california santa barbara,2.92,2.76,big-west,17,11
+139,florida atlantic,3.29,2.68,cusa,19,14
+140,ohio,2.03,2.33,mac,24,9
+141,east carolina,2.49,1.97,aac,15,15
+142,seattle,2.08,1.96,wac,23,9
+143,wofford,2.26,1.93,southern,19,13
+144,morehead state,1.94,1.84,ovc,23,11
+145,long beach state,2.53,1.8,big-west,20,13
+146,fordham,2.13,1.79,atlantic-10,16,16
+147,longwood,0.26,1.63,big-south,26,7
+148,montana state,1.16,1.46,big-sky,27,8
+149,north dakota state,1.96,1.42,summit,23,10
+150,hawaii,0.77,1.38,big-west,17,11
+151,princeton,1.45,1.37,ivy,23,7
+152,south alabama,1.74,1.28,sun-belt,20,11
+153,texas el paso,1.27,1.15,cusa,19,13
+154,north carolina wilmington,1.36,1.12,colonial,23,9
+155,liberty,1.65,1.04,atlantic-sun,22,11
+156,buffalo,1.06,0.97,mac,19,11
+157,massachusetts,1.26,0.78,atlantic-10,15,17
+158,monmouth,1.26,0.77,maac,21,13
+159,wright state,0.55,0.76,horizon,22,14
+160,valparaiso,0.75,0.53,mvc,14,18
+161,san diego,0.31,0.48,wcc,15,16
+162,california riverside,0.66,0.45,big-west,16,12
+163,sam houston state,0.9,0.33,wac,19,14
+164,saint josephs,0.48,0.24,atlantic-10,11,19
+165,kent state,0.44,0.2,mac,23,11
+166,florida gulf coast,-0.15,0.12,atlantic-sun,22,11
+167,illinois state,0.12,-0.12,mvc,13,20
+168,delaware,-0.15,-0.15,colonial,22,13
+169,loyola marymount,-0.7,-0.2,wcc,11,18
+170,college of charleston,0.3,-0.27,colonial,17,15
+171,charlotte,-0.22,-0.39,cusa,17,14
+172,jacksonville,-0.99,-0.44,atlantic-sun,21,10
+173,oregon state,-0.11,-0.47,pac-12,3,28
+174,yale,-0.29,-0.49,ivy,19,12
+175,southern utah,-0.27,-0.5,big-sky,21,11
+176,weber state,-0.68,-0.92,big-sky,21,12
+177,nicholls state,-1.48,-0.95,southland,21,12
+178,oral roberts,-0.63,-0.97,summit,19,12
+179,california irvine,-0.98,-1.12,big-west,15,10
+180,pittsburgh,-0.28,-1.16,acc,11,21
+181,georgia,-1.91,-1.46,sec,6,26
+182,winthrop,-1.35,-1.55,big-south,23,9
+183,northern kentucky,-1.26,-1.62,horizon,20,12
+184,appalachian state,-1.65,-1.62,sun-belt,19,15
+185,drexel,-0.69,-1.74,colonial,15,14
+186,coastal carolina,-0.26,-1.97,sun-belt,17,13
+187,cleveland state,-1.33,-2.04,horizon,20,11
+188,arkansas state,-2.41,-2.25,sun-belt,18,11
+189,samford,-2.3,-2.54,southern,21,11
+190,troy,-2.44,-2.58,sun-belt,20,11
+191,niagara,-2.77,-2.67,maac,14,16
+192,louisiana lafayette,-3.22,-2.72,sun-belt,16,15
+193,north carolina greensboro,-2.72,-2.91,southern,17,14
+194,oakland,-2.7,-2.92,horizon,20,12
+195,george washington,-3.79,-3.0,atlantic-10,12,18
+196,california baptist,-3.03,-3.23,wac,18,15
+197,old dominion,-3.16,-3.31,cusa,13,19
+198,south dakota,-3.61,-3.58,summit,19,12
+199,virginia military institute,-3.46,-3.67,southern,16,15
+200,ipfw,-3.9,-3.67,horizon,21,11
+201,james madison,-4.02,-3.72,colonial,15,14
+202,portland,-3.29,-3.99,wcc,18,14
+203,california davis,-2.98,-4.13,big-west,13,11
+204,marist,-4.39,-4.18,maac,14,16
+205,south florida,-4.03,-4.42,aac,8,23
+206,east tennessee state,-3.63,-4.5,southern,15,17
+207,la salle,-4.29,-4.56,atlantic-10,11,19
+208,rider,-4.42,-4.7,maac,14,19
+209,cornell,-4.5,-4.72,ivy,15,11
+210,bellarmine,-3.72,-4.76,atlantic-sun,20,13
+211,northern colorado,-4.9,-4.78,big-sky,20,15
+212,air force,-5.12,-4.84,mwc,11,18
+213,bryant,-4.94,-4.96,northeast,22,10
+214,wagner,-4.72,-4.97,northeast,21,6
+215,brown,-4.82,-5.06,ivy,13,16
+216,detroit mercy,-4.65,-5.09,horizon,14,16
+217,gardner webb,-4.04,-5.27,big-south,18,13
+218,dartmouth,-4.78,-5.28,ivy,9,16
+219,missouri kansas city,-4.5,-5.31,summit,19,12
+220,tarleton state,-5.18,-5.36,wac,14,17
+221,norfolk state,-5.57,-5.44,meac,24,7
+222,texas southern,-5.58,-5.48,swac,19,13
+223,indiana state,-5.65,-5.62,mvc,11,20
+224,navy,-5.69,-5.75,patriot,21,11
+225,mercer,-5.89,-6.4,southern,16,17
+226,southeast missouri state,-6.38,-6.43,ovc,14,18
+227,rice,-6.0,-6.43,cusa,16,16
+228,marshall,-5.92,-6.44,cusa,12,21
+229,harvard,-7.18,-6.55,ivy,13,13
+230,boston university,-6.99,-6.59,patriot,21,12
+231,eastern washington,-6.75,-6.61,big-sky,18,16
+232,maryland baltimore county,-6.79,-6.63,america-east,18,14
+233,fairfield,-6.42,-6.96,maac,15,18
+234,northeastern,-7.03,-7.09,colonial,9,22
+235,high point,-6.59,-7.14,big-south,14,18
+236,citadel,-7.28,-7.17,southern,13,18
+237,pennsylvania,-7.09,-7.4,ivy,12,16
+238,western illinois,-8.02,-7.44,summit,16,15
+239,new hampshire,-7.54,-7.65,america-east,15,13
+240,north carolina asheville,-7.33,-7.7,big-south,16,14
+241,texas am corpus christi,-7.93,-7.72,southland,23,12
+242,pepperdine,-7.49,-7.96,wcc,7,25
+243,quinnipiac,-8.17,-8.22,maac,14,17
+244,stony brook,-8.33,-8.36,america-east,18,13
+245,campbell,-7.35,-8.53,big-south,16,13
+246,southeastern louisiana,-8.7,-8.64,southland,19,15
+247,kennesaw state,-8.68,-8.8,atlantic-sun,13,18
+248,eastern kentucky,-8.53,-8.99,atlantic-sun,13,18
+249,canisius,-8.68,-9.14,maac,11,21
+250,miami oh,-9.3,-9.23,mac,14,18
+251,georgia southern,-8.86,-9.23,sun-belt,13,16
+252,youngstown state,-8.92,-9.25,horizon,19,14
+253,siena,-9.04,-9.3,maac,15,14
+254,elon,-8.91,-9.35,colonial,10,22
+255,manhattan,-9.16,-9.4,maac,15,15
+256,florida international,-9.68,-9.43,cusa,15,17
+257,texas san antonio,-9.38,-9.44,cusa,10,22
+258,texas arlington,-9.2,-9.44,sun-belt,11,18
+259,loyola md,-9.69,-9.58,patriot,14,16
+260,tennessee state,-9.83,-9.61,ovc,14,18
+261,southern,-9.82,-9.67,swac,17,14
+262,dixie state,-9.65,-9.7,wac,13,18
+263,north florida,-10.39,-10.35,atlantic-sun,11,20
+264,long island university,-9.65,-10.44,northeast,16,14
+265,cal state bakersfield,-10.75,-10.59,big-west,9,19
+266,lipscomb,-9.55,-10.63,atlantic-sun,14,19
+267,new orleans,-11.14,-10.67,southland,18,13
+268,portland state,-10.83,-10.75,big-sky,14,17
+269,tennessee tech,-10.67,-10.79,ovc,11,21
+270,illinois chicago,-10.23,-10.87,horizon,14,16
+271,massachusetts lowell,-11.11,-10.89,america-east,15,16
+272,duquesne,-10.72,-10.92,atlantic-10,6,24
+273,louisiana monroe,-10.03,-10.96,sun-belt,13,18
+274,presbyterian,-11.09,-10.99,big-south,12,20
+275,northern illinois,-11.73,-11.0,mac,9,21
+276,montana,-10.22,-11.16,big-sky,18,14
+277,alcorn state,-11.56,-11.37,swac,17,17
+278,mount st marys,-11.71,-11.44,northeast,14,16
+279,army,-11.8,-11.63,patriot,15,16
+280,san jose state,-11.45,-11.64,mwc,8,23
+281,howard,-11.78,-11.66,meac,16,13
+282,ball state,-10.99,-11.83,mac,14,17
+283,pacific,-11.92,-11.87,wcc,8,22
+284,california san diego,-11.88,-11.93,big-west,13,16
+285,radford,-11.9,-12.0,big-south,11,18
+286,alabama state,-12.57,-12.0,swac,10,21
+287,jackson state,-12.54,-12.21,swac,11,19
+288,denver,-12.48,-12.42,summit,11,21
+289,south carolina upstate,-11.66,-12.47,big-south,15,16
+290,central michigan,-13.13,-12.74,mac,7,23
+291,hartford,-12.06,-12.83,america-east,12,20
+292,southern illinois edwardsville,-13.24,-12.85,ovc,11,21
+293,binghamton,-12.56,-13.05,america-east,12,17
+294,evansville,-12.91,-13.16,mvc,6,24
+295,bowling green state,-13.13,-13.22,mac,13,18
+296,prairie view,-13.34,-13.23,swac,8,19
+297,cal poly,-12.63,-13.35,big-west,7,21
+298,north carolina at,-14.05,-13.5,big-south,12,20
+299,albany ny,-14.65,-13.99,america-east,13,18
+300,north alabama,-14.75,-14.32,atlantic-sun,9,21
+301,texas pan american,-14.24,-14.45,wac,8,23
+302,lehigh,-14.83,-14.5,patriot,13,19
+303,western carolina,-14.43,-14.6,southern,11,21
+304,merrimack,-14.2,-14.69,northeast,14,16
+305,eastern michigan,-14.37,-14.73,mac,10,21
+306,coppin state,-15.75,-14.83,meac,9,23
+307,stetson,-14.7,-15.01,atlantic-sun,11,19
+308,sacramento state,-15.28,-15.33,big-sky,11,18
+309,austin peay,-14.05,-15.33,ovc,12,17
+310,tennessee martin,-14.96,-15.44,ovc,8,22
+311,st thomas mn,-15.52,-15.44,summit,10,20
+312,cal state northridge,-15.71,-15.71,big-west,7,23
+313,idaho,-15.31,-15.93,big-sky,9,22
+314,robert morris,-16.42,-16.11,horizon,8,24
+315,northwestern state,-16.78,-16.21,southland,9,23
+316,north carolina central,-16.22,-16.42,meac,16,15
+317,southern mississippi,-16.78,-16.5,cusa,7,26
+318,lafayette,-17.57,-16.54,patriot,10,20
+319,morgan state,-16.64,-16.58,meac,13,15
+320,florida am,-16.11,-16.6,swac,13,17
+321,arkansas little rock,-16.08,-16.79,sun-belt,9,19
+322,mcneese state,-15.78,-16.84,southland,11,22
+323,milwaukee,-17.53,-16.99,horizon,10,22
+324,western michigan,-16.94,-17.22,mac,8,23
+325,grambling,-17.57,-17.24,swac,12,20
+326,central arkansas,-16.75,-17.37,atlantic-sun,11,20
+327,alabama am,-16.86,-17.46,swac,12,18
+328,sacred heart,-17.27,-17.49,northeast,10,20
+329,hampton,-17.82,-17.53,big-south,9,19
+330,northern arizona,-17.51,-17.56,big-sky,9,23
+331,houston baptist,-17.75,-17.64,southland,11,18
+332,south carolina state,-17.69,-17.77,meac,15,16
+333,bethune cookman,-17.85,-17.9,swac,9,21
+334,idaho state,-19.01,-18.01,big-sky,7,23
+335,nebraska omaha,-19.08,-18.27,summit,5,25
+336,william mary,-18.27,-18.38,colonial,5,27
+337,green bay,-18.03,-18.46,horizon,5,25
+338,american,-18.66,-18.95,patriot,10,22
+339,st francis ny,-19.4,-18.99,northeast,10,20
+340,bucknell,-19.17,-19.44,patriot,9,23
+341,columbia,-20.29,-19.58,ivy,4,22
+342,chicago state,-18.4,-19.58,wac,7,25
+343,maryland eastern shore,-19.69,-19.76,meac,11,16
+344,lamar,-19.31,-19.88,wac,2,27
+345,north dakota,-21.15,-20.66,summit,6,25
+346,incarnate word,-20.86,-21.02,southland,7,25
+347,njit,-21.53,-21.16,america-east,11,18
+348,holy cross,-22.45,-21.66,patriot,9,22
+349,saint francis pa,-22.07,-21.76,northeast,9,21
+350,arkansas pine bluff,-22.72,-22.27,swac,7,24
+351,charleston southern,-23.07,-22.74,big-south,6,25
+352,maine,-24.44,-22.76,america-east,6,23
+353,mississippi valley state,-24.59,-24.51,swac,2,26
+354,fairleigh dickinson,-24.01,-24.59,northeast,4,22
+355,central connecticut state,-26.4,-26.97,northeast,8,24
+356,delaware state,-27.13,-27.79,meac,2,26
+357,iupui,-31.03,-29.67,horizon,3,26
+358,eastern illinois,-29.7,-29.87,ovc,5,26
